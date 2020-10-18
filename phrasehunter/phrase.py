@@ -11,9 +11,12 @@ class Phrase:
             else:
                 print('_', end=" ")
     
-    # This method unlike display takes the guess argument and uses the guess argument to redisplay 
-    # the phrase to the screen, this time with added letters
+
     def redisplay(self, guess):
+        """ 
+        This method unlike display takes the guess argument and uses the guess argument to redisplay 
+        the phrase to the screen, this time with added letters
+        """
         for letter in self.phrase.lower():
             if letter == guess:
                 if guess not in self.right_letters:
@@ -31,10 +34,13 @@ class Phrase:
         if guess in self.phrase:
             self.correct_guesses += 1
             
-    # This method uses """.join(set(self.phrase))" to pull just the letters one time that go 
-    # into phrase, for example if "E" shows up twice in the phrase, it will only show up once in this new list
-    # then compares that list to the right_letters list
+
     def check_complete(self):
+        """ 
+        This method uses "".join(set(self.phrase))" to pull just the letters one time that go 
+        into phrase, for example if "E" shows up twice in the phrase, it will only show up once in this new list
+        then compares that list to the right_letters list
+        """
         spaces = 0
         phrase_length = "".join(set(self.phrase))
         

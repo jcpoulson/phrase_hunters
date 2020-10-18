@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
         self.missed = 0
         self.lives = 5
-        self.phrases = ['Playstation Four', 'Matcha Soda', 'Demon Slayer', 'Finishing This Fight', 'Team Treehouse']
+        self.phrases = [Phrase('Playstation Four'), Phrase('Matcha Soda'), Phrase('Demon Slayer'), Phrase('Finishing This Fight'), Phrase('Team Treehouse')]
         self.active_phrase = None
         self.guesses = []
 
@@ -23,24 +23,24 @@ class Game:
         elif ask.isalpha() != True:
             raise ValueError("\nYou entered an invalid character")
         print()
-        return ask
+        return ask.lower()
 
     def game_over(self):
         print("\n\nSorry, You ran out of tries")
     
     def start(self):
         self.welcome()
-        self.active_phrase = self.get_random_phrase()
+        self.active_phrase = self.get_random_phrase().phrase
         phrase = Phrase(self.active_phrase)
         phrase.display()
         while True:
             try:
                 guess = self.get_guess()
                 # if a player guesses the same letter twice
-                if guess.lower() in self.guesses:
+                if guess in self.guesses:
                     print("You already guessed this letter, try a different one \n")
                     phrase.redisplay(guess)
-                elif guess.lower() not in self.active_phrase.lower():
+                elif guess not in self.active_phrase.lower():
                     self.guesses.append(guess)
                     self.missed += 1
                     self.lives -= 1
@@ -48,7 +48,7 @@ class Game:
                     print("\n\nyou guessed wrong\n")
                     print("you have {} out 5 tries left\n".format(self.lives))
                     phrase.redisplay(guess)
-                elif guess.lower() in self.active_phrase.lower():
+                elif guess in self.active_phrase.lower():
                     self.guesses.append(guess)
                     print("\nyou guessed right\n\n")
                     self.guesses.append(guess)
